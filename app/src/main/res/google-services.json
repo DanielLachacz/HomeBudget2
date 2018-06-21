@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "669049741622",
+    "firebase_url": "https://homebudget2-18c29.firebaseio.com",
+    "project_id": "homebudget2-18c29",
+    "storage_bucket": "homebudget2-18c29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669049741622:android:795e56ef36537b70",
+        "android_client_info": {
+          "package_name": "com.example.daniellachacz.homebudget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669049741622-6litgi6uki48hp59efsgdn6atd4bsk6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.daniellachacz.homebudget",
+            "certificate_hash": "86e460cfee7f8a28e69e3d949f0d82c4b4bcc394"
+          }
+        },
+        {
+          "client_id": "669049741622-utatfgikq60k2msmmnpbjsr6qt4gla1s.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "669049741622-utatfgikq60k2msmmnpbjsr6qt4gla1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6jk_0hYujB-En7y0h9xoQnFd9WwbdTwE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669049741622-utatfgikq60k2msmmnpbjsr6qt4gla1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:id="@+id/fragment_home">
+
+
+    <EditText
+        android:id="@+id/descriptionField"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Opis"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/valueField"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="Wartość" />
+
+    <EditText
+        android:id="@+id/dateField"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="160dp"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="Data" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="Dodaj wydatek" />
+
+    <Button
+        android:id="@+id/incomeButton"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="Dodaj przychód"
+        />
+
+
+</FrameLayout>
