@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 
@@ -31,14 +32,18 @@ public class ListFragment extends Fragment {
     private TextView mTextDescription2;
     private TextView mTextValue2;
 
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
 
     private static final String TAG = "ListFragment";
     private FirebaseListAdapter listAdapter;
     private FirebaseListAdapter listAdapter2;
+
+    static Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR); // get the current year
+    int month = cal.get(Calendar.MONTH); // month...
+    int week = cal.get(Calendar.WEEK_OF_YEAR);
+    int day = cal.get(Calendar.DAY_OF_MONTH);
 
 
     @Override

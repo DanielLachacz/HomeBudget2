@@ -13,7 +13,6 @@
         android:id="@+id/descriptionField"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -24,29 +23,17 @@
         android:id="@+id/valueField"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="90dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:hint="Wartość" />
 
-    <EditText
-        android:id="@+id/dateField"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
-        android:ems="10"
-        android:inputType="date"
-        android:hint="Data" />
-
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/expenseButton"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="210dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:text="Dodaj wydatek" />
@@ -55,7 +42,7 @@
         android:id="@+id/incomeButton"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="280dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:text="Dodaj przychód"

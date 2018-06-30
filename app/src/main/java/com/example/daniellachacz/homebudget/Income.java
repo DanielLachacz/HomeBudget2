@@ -1,17 +1,29 @@
 package com.example.daniellachacz.homebudget;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Income {
 
-    public String incomeDescription, incomeDate;
-    public Double incomeValue;
+    Long incomeDateLong = System.currentTimeMillis();
+    String incomeDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date(incomeDateLong));
+    private String incomeDescription;
+    private Double incomeValue;
+
+    static Calendar cal = Calendar.getInstance();
+    int incomeYear = cal.get(Calendar.YEAR);
+    int incomeMonth = cal.get(Calendar.MONTH);
+    int incomeWeek = cal.get(Calendar.WEEK_OF_YEAR);
+    int incomeDay = cal.get(Calendar.DAY_OF_MONTH);
 
     public Income() {
 
     }
 
-    public Income(String incomeDescription, String incomeDate, Double incomeValue) {
+    public Income(String incomeDescription, Double incomeValue) {
         this.incomeDescription = incomeDescription;
-        this.incomeDate = incomeDate;
         this.incomeValue = incomeValue;
 
     }
@@ -39,4 +51,6 @@ public class Income {
     public void setIncomeValue(Double incomeValue) {
         this.incomeValue = incomeValue;
     }
+
+
 }

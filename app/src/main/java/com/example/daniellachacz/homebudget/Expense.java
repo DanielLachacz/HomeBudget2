@@ -1,19 +1,29 @@
 package com.example.daniellachacz.homebudget;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Expense {
 
-    String description, date;
+    Long dateLong = System.currentTimeMillis();
+    String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date(dateLong));
+    String description;
     Double value;
 
+    static Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR);
+    int month = cal.get(Calendar.MONTH);
+    int week = cal.get(Calendar.WEEK_OF_YEAR);
+    int day = cal.get(Calendar.DAY_OF_MONTH);
 
     public Expense() {
 
     }
 
-    public Expense( String description, String date, Double value) {
+    public Expense(String description, Double value) {
 
         this.description = description;
-        this.date = date;
         this.value = value;
     }
 
@@ -40,4 +50,6 @@ public class Expense {
     public void setValue(Double value) {
         this.value = value;
     }
+
+
 }

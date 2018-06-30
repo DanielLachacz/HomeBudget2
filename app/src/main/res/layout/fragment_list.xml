@@ -9,34 +9,34 @@
    <TextView
        android:id="@+id/textView"
        android:layout_width="match_parent"
-       android:layout_height="34dp"
-       android:textSize="21dp"
-       android:textColor="#020202"
+       android:layout_height="30dp"
+       android:gravity="center"
        android:text="Wydatki"
-       android:gravity="center" />
+       android:textColor="#020202"
+       android:textSize="21dp" />
 
    <ListView
        android:id="@+id/myListView"
        android:layout_width="match_parent"
-       android:layout_height="203dp"
-       android:layout_marginTop="35dp"/>
+       android:layout_height="200dp"
+       android:layout_marginTop="29dp"/>
 
 
    <TextView
        android:id="@+id/textView2"
        android:layout_width="match_parent"
-       android:layout_height="34dp"
+       android:layout_height="30dp"
+       android:layout_marginTop="230dp"
        android:gravity="center"
        android:text="Przychody"
        android:textColor="#020202"
-       android:textSize="21dp"
-       android:layout_marginTop="238dp"/>
+       android:textSize="21dp" />
 
    <ListView
        android:id="@+id/myListView2"
        android:layout_width="match_parent"
-       android:layout_height="203dp"
-       android:layout_marginTop="273dp"
+       android:layout_height="200dp"
+       android:layout_marginTop="261dp"
        />
 
 

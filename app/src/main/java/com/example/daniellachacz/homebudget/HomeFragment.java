@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,9 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-
     private EditText mDescriptionField;
-    private EditText mDateField;
     private EditText mValueField;
 
     private DatabaseReference myRef;
@@ -30,17 +27,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Income addIncome;
 
 
-
-
     public interface Expense {
 
-        void addExpense(String description, String date, Double value);
+        void addExpense(String description, Double value);
 
     }
 
+
     public interface Income {
 
-        void addIncome(String incomeDescription, String incomeDate, Double incomeValue);
+        void addIncome(String incomeDescription, Double incomeValue);
     }
 
 
@@ -52,31 +48,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         myRef = FirebaseDatabase.getInstance().getReference().child("Expense");
 
         mDescriptionField = v.findViewById(R.id.descriptionField);
-        mDateField = v.findViewById(R.id.dateField);
+
         mValueField = v.findViewById(R.id.valueField);
-        Button SaveButton = v.findViewById(R.id.saveButton);
+        Button ExpenseButton = v.findViewById(R.id.expenseButton);
         Button IncomeButton = v.findViewById(R.id.incomeButton);
-        SaveButton.setOnClickListener(this);
+        ExpenseButton.setOnClickListener(this);
         IncomeButton.setOnClickListener(this);
 
        return v;
 
     }
 
+
     @Override
     public void onClick(View v) {
         int viedID = v.getId();
         switch (viedID) {
 
-            case R.id.saveButton:
+            case R.id.expenseButton:
 
                 String description = mDescriptionField.getText().toString();
-                String date = mDateField.getText().toString();
                 Double value = Double.valueOf(mValueField.getText().toString());
+                mDescriptionField.setText("");
+                mValueField.setText("");
 
-                if(!description.equals("") && !date.equals("") && !value.equals("")) {
+                if(!description.equals("") && !value.equals("")) {
 
-                    addExpense.addExpense(description, date, value);
+                    addExpense.addExpense(description, value);
 
                     Toast.makeText(getActivity(), "Dodano wydatek", Toast.LENGTH_LONG).show();
                 }
@@ -89,12 +87,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
                 String incomeDescription = mDescriptionField.getText().toString();
-                String incomeDate = mDateField.getText().toString();
                 Double incomeValue = Double.valueOf(mValueField.getText().toString());
+                mDescriptionField.setText("");
+                mValueField.setText("");
 
-                if(!incomeDescription.equals("") && !incomeDate.equals("") && !incomeValue.equals("")) {
 
-                    addIncome.addIncome(incomeDescription, incomeDate, incomeValue);
+                if(!incomeDescription.equals("") && !incomeValue.equals("")) {
+
+                    addIncome.addIncome(incomeDescription, incomeValue);
 
                     Toast.makeText(getActivity(), "Dodano przychód", Toast.LENGTH_LONG).show();
                 }
@@ -105,6 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
 
     @Override
     public void onAttach(Context context) throws ClassCastException {
