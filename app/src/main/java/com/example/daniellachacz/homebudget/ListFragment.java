@@ -39,12 +39,6 @@ public class ListFragment extends Fragment {
     private FirebaseListAdapter listAdapter;
     private FirebaseListAdapter listAdapter2;
 
-    static Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR); // get the current year
-    int month = cal.get(Calendar.MONTH); // month...
-    int week = cal.get(Calendar.WEEK_OF_YEAR);
-    int day = cal.get(Calendar.DAY_OF_MONTH);
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

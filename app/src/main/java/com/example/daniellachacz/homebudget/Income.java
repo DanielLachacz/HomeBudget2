@@ -13,7 +13,6 @@ public class Income {
     private Double incomeValue;
 
     static Calendar cal = Calendar.getInstance();
-    int incomeYear = cal.get(Calendar.YEAR);
     int incomeMonth = cal.get(Calendar.MONTH);
     int incomeWeek = cal.get(Calendar.WEEK_OF_YEAR);
     int incomeDay = cal.get(Calendar.DAY_OF_MONTH);

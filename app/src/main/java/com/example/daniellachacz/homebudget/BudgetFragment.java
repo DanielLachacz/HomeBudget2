@@ -3,6 +3,7 @@ package com.example.daniellachacz.homebudget;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -42,12 +45,21 @@ public class BudgetFragment extends Fragment {
     private TextView mBudgetText7;
     private TextView mBudgetText8;
     private TextView mBudgetText9;
+    private TextView mBudgetText10;
+    private TextView mBudgetText11;
+    private TextView mBudgetText12;
 
     static Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR); // get the current year
     int month = cal.get(Calendar.MONTH); // month...
     int week = cal.get(Calendar.WEEK_OF_YEAR);
     int day = cal.get(Calendar.DAY_OF_MONTH);
+
+    private double incomeDay;
+    private double expenseDay;
+    private double incomeWeek;
+    private double expenseWeek;
+    private double incomeMonth;
+    private double expenseMonth;
 
     public BudgetFragment() {
         // Required empty public constructor
@@ -68,6 +80,9 @@ public class BudgetFragment extends Fragment {
         mBudgetText7 = v.findViewById(R.id.budgetText7);
         mBudgetText8 = v.findViewById(R.id.budgetText8);
         mBudgetText9 = v.findViewById(R.id.budgetText9);
+        mBudgetText10 = v.findViewById(R.id.budgetText10);
+        mBudgetText11 = v.findViewById(R.id.budgetText11);
+        mBudgetText12 = v.findViewById(R.id.budgetText12);
 
         final PieChart mPieChart = (PieChart) v.findViewById(R.id.piechart);
 
@@ -112,7 +127,15 @@ public class BudgetFragment extends Fragment {
                 mBudgetText2.setText(String.valueOf("- " + totalExpense));
                 Log.d("TAG", "totalExpense " + String.valueOf(totalExpense));
 
-                mBudgetText3.setText(String.valueOf(totalIncome - totalExpense));
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                mBudgetText3.setText(df.format(totalIncome - totalExpense));
+                if(totalIncome < totalExpense) {
+                    mBudgetText3.setTextColor(Color.parseColor("#ab0808"));
+                }
+                else if(totalIncome > totalExpense) {
+                    mBudgetText3.setTextColor(Color.parseColor("#22af15"));
+                }
 
                 mPieChart.addPieSlice(new PieModel((float) totalIncome, Color.parseColor("#22af15")));
                 mPieChart.addPieSlice(new PieModel((float) totalExpense, Color.parseColor("#ab0808")));
@@ -133,7 +156,6 @@ public class BudgetFragment extends Fragment {
                   See the License for the specific language governing permissions and
                   limitations under the License.
                  */
-
             }
 
             @Override
@@ -141,8 +163,10 @@ public class BudgetFragment extends Fragment {
 
             }
 
+
         };
         mAuth.addValueEventListener(eventListener);
+
 
         Query query = FirebaseDatabase.getInstance().getReference().child(uid).child("Income").orderByChild("incomeDay").equalTo(day);
         query.addValueEventListener  (new ValueEventListener() {                                                                       //Method for Income per Day
@@ -154,6 +178,9 @@ public class BudgetFragment extends Fragment {
                        }
                        mBudgetText4.setText(String.valueOf(totalIncomeDay));
                        Log.d("TAG", "totalIncomeDay " + String.valueOf(totalIncomeDay));
+
+                       incomeDay += totalIncomeDay;
+                        Log.d("TAG", "incomeDay " + String.valueOf(incomeDay));
                     }
 
                     @Override
@@ -161,6 +188,7 @@ public class BudgetFragment extends Fragment {
 
                     }
                 });
+
 
         Query query2 = FirebaseDatabase.getInstance().getReference().child(uid).child("Expense").orderByChild("day").equalTo(day);
         query2.addValueEventListener(new ValueEventListener() {                                                                    //Method for Expense per Day
@@ -172,13 +200,18 @@ public class BudgetFragment extends Fragment {
                 }
                 mBudgetText5.setText(String.valueOf("- " + totalExpenseDay));
                 Log.d("TAG", "totalExpenseDay " + String.valueOf(totalExpenseDay));
+
+                expenseDay += totalExpenseDay;
+                Log.d("TAG", "expenseDay " + String.valueOf(expenseDay));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
+
 
         Query query3 = FirebaseDatabase.getInstance().getReference().child(uid).child("Income").orderByChild("incomeWeek").equalTo(week);
         query3.addValueEventListener(new ValueEventListener() {                                                                           //Method for Income per Week
@@ -190,6 +223,9 @@ public class BudgetFragment extends Fragment {
                 }
                 mBudgetText6.setText(String.valueOf(totalIncomeWeek));
                 Log.d("TAG", "totalIncomeWeek " + String.valueOf(totalIncomeWeek));
+
+                incomeWeek += totalIncomeWeek;
+                Log.d("TAG", "incomeWeek " + String.valueOf(incomeWeek));
             }
 
             @Override
@@ -197,6 +233,7 @@ public class BudgetFragment extends Fragment {
 
             }
         });
+
 
         Query query4 = FirebaseDatabase.getInstance().getReference().child(uid).child("Expense").orderByChild("week").equalTo(week);
         query4.addValueEventListener(new ValueEventListener() {                                                                      //Method for Expense per Week
@@ -208,6 +245,9 @@ public class BudgetFragment extends Fragment {
                 }
                 mBudgetText7.setText(String.valueOf("- " + totalExpenseWeek));
                 Log.d("TAG", "totalExpenseWeek " + String.valueOf(totalExpenseWeek));
+
+                expenseWeek += totalExpenseWeek;
+                Log.d("TAG", "expenseWeek " + String.valueOf(expenseWeek));
             }
 
             @Override
@@ -215,6 +255,7 @@ public class BudgetFragment extends Fragment {
 
             }
         });
+
 
         Query query5 = FirebaseDatabase.getInstance().getReference().child(uid).child("Income").orderByChild("incomeMonth").equalTo(month);
         query5.addValueEventListener(new ValueEventListener() {                                                                            //Method for Income per Month
@@ -226,6 +267,9 @@ public class BudgetFragment extends Fragment {
                 }
                 mBudgetText8.setText(String.valueOf(totalIncomeMonth));
                 Log.d("TAG", "totalIncomeMonth " + String.valueOf(totalIncomeMonth));
+
+                incomeMonth += totalIncomeMonth;
+                Log.d("TAG", "incomeMonth " + String.valueOf(incomeMonth));
             }
 
             @Override
@@ -233,6 +277,7 @@ public class BudgetFragment extends Fragment {
 
             }
         });
+
 
         Query query6 = FirebaseDatabase.getInstance().getReference().child(uid).child("Expense").orderByChild("month").equalTo(month);
         query6.addValueEventListener(new ValueEventListener() {                                                                       //Method for Expense per Month
@@ -244,6 +289,9 @@ public class BudgetFragment extends Fragment {
                 }
                 mBudgetText9.setText(String.valueOf("- " + totalExpenseMonth));
                 Log.d("TAG", "totalExpenseMonth " + String.valueOf(totalExpenseMonth));
+
+                expenseMonth += totalExpenseMonth;
+                Log.d("TAG", "expenseMonth " + String.valueOf(expenseMonth));
             }
 
             @Override
@@ -253,6 +301,57 @@ public class BudgetFragment extends Fragment {
         });
 
 
+        mRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {        // Method created for counting sum of budget
+                DecimalFormat df = new DecimalFormat("0.00");                                 // by day, week and month
+
+                mBudgetText10.setText(df.format(incomeDay - expenseDay));
+                if(incomeDay < expenseDay) {
+                    mBudgetText10.setTextColor(Color.parseColor("#ab0808"));
+                }
+                else if(incomeDay > expenseDay) {
+                    mBudgetText10.setTextColor(Color.parseColor("#22af15"));
+                }
+
+                mBudgetText11.setText(df.format(incomeWeek - expenseWeek));
+                if(incomeWeek < expenseWeek) {
+                    mBudgetText11.setTextColor(Color.parseColor("#ab0808"));
+                }
+                else if (incomeWeek > expenseWeek) {
+                    mBudgetText11.setTextColor(Color.parseColor("#22af15"));
+                }
+
+                mBudgetText12.setText(df.format(incomeMonth - expenseMonth));
+                if (incomeMonth < expenseMonth) {
+                    mBudgetText12.setTextColor(Color.parseColor("#ab0808"));
+                }
+                else if (incomeMonth > expenseMonth) {
+                    mBudgetText12.setTextColor(Color.parseColor("#22af15"));
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         return  v;

@@ -8,11 +8,10 @@ public class Expense {
 
     Long dateLong = System.currentTimeMillis();
     String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date(dateLong));
-    String description;
-    Double value;
+    private String description;
+    private Double value;
 
     static Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH);
     int week = cal.get(Calendar.WEEK_OF_YEAR);
     int day = cal.get(Calendar.DAY_OF_MONTH);
